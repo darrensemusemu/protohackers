@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/darrensemusemu/protohackers/go/internal/primetime"
 	"github.com/darrensemusemu/protohackers/go/internal/smoketest"
 	"github.com/darrensemusemu/protohackers/go/pkg/server"
 )
@@ -17,7 +18,7 @@ type Config struct {
 func main() {
 	cfg := Config{}
 	flag.IntVar(&cfg.port, "port", 8080, "Listening port")
-	flag.StringVar(&cfg.problem, "problem", "-0", "Problem solution to run")
+	flag.StringVar(&cfg.problem, "problem", "0", "Problem solution to run")
 	flag.Parse()
 
 	if err := run(cfg); err != nil {
@@ -30,8 +31,10 @@ func run(cfg Config) error {
 	var svc server.Service
 
 	switch cfg.problem {
-	case "-0":
+	case "0":
 		svc = smoketest.New()
+	case "1":
+		svc = primetime.New()
 	default:
 		return fmt.Errorf("'problem' flag'%s' not valid, see -help", cfg.problem)
 	}
