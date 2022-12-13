@@ -4,3 +4,5 @@ Solutions to [Protohackers](https://protohackers.com/) programming challenge in 
 
 ## Project Structure
 
+- [go](./go): solutions written in GO
+
